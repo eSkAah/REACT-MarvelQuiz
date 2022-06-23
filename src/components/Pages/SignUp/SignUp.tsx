@@ -1,14 +1,15 @@
-import React, {useReducer, useState} from "react";
+import React, {useReducer} from "react";
 import {AuthReducer, initialLoginDataState} from "../../../modules/Auth/_redux/authRedux";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../../Firebase/firebaseConfig"
 
 
-//Cours : 101.11 23min44
+//Cours : 103
 const SignUp = () => {
 
 
     const [state, dispatch] = useReducer(AuthReducer, initialLoginDataState);
-    const [loginData, setLoginData] = useState();
-
+    const {username, email, password, confirmPassword, isError, helperText} = state;
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const id = event.target.id;
@@ -40,8 +41,26 @@ const SignUp = () => {
         }
     }
 
-    const btnSubmit = state.username === "" || state.email === "" || state.password === "" || state.password !== state.confirmPassword
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();//Block window reload
+        const {email, password} = state
+        console.log(email, password)
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(user => {
+                console.log("USER:", user)
+            })
+            .catch(error => {
+                console.log(error)
+                dispatch({
+                    type: "setIsError",
+                    payload: true
+                })
+            })
+    }
+
+    const btnSubmit = username === "" || email === "" || password === "" || password !== confirmPassword
         ? <button disabled>Inscription</button> : <button>Inscription</button>
+
 
     return (
         <div className="signUpLoginBox">
@@ -52,7 +71,7 @@ const SignUp = () => {
                 <div className="formBoxRight">
                     <div className="formContent">
                         <h2>Inscription</h2>
-                        <form>
+                        <form onSubmit={handleSubmit}>
                             <div className="inputBox">
                                 <input onChange={handleInputChange} type="text" id="username" autoComplete="off"
                                        required/>
@@ -78,7 +97,9 @@ const SignUp = () => {
 
                             {btnSubmit}
                         </form>
-
+                        {isError ??
+                            <span>{helperText}</span>
+                        }
                     </div>
                 </div>
             </div>

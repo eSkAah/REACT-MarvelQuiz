@@ -13,7 +13,7 @@ export const initialLoginDataState: ILoginData = {
     password: "",
     confirmPassword: "",
     isError: false,
-    helperText: ""
+    helperText: "Someting's wrong..."
 }
 
 export type LoginActionType = { type: "setUsername", payload: string }
