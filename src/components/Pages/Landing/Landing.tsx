@@ -13,7 +13,7 @@ const Landing = () => {
         setTimeout(() => {
             refWolverine?.current?.classList.remove('startingImg');
             setBtn(true);
-        }, 1500)
+        }, 1000)
     }, []);
 
     const setLeftClaw = () => {

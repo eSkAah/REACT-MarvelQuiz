@@ -1,13 +1,15 @@
 import * as React from 'react';
-import * as ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import reportWebVitals from './reportWebVitals';
-import Index from "./components/App";
+import App from "./components/App/App";
 
-ReactDOM.render(
+
+// @ts-ignore
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
     <React.StrictMode>
-        <Index/>
+        <App/>
     </React.StrictMode>,
-    document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

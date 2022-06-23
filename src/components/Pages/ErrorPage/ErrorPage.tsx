@@ -1,6 +1,6 @@
 import * as CSS from "csstype";
 
-const batman = require("../../images/batman.png");
+const batman = require("../../../images/batman.png");
 
 const centerH2: CSS.Properties = {
     textAlign: "center",
