@@ -1,6 +1,8 @@
 import React, {useReducer, useState} from "react";
 import {AuthReducer, initialLoginDataState} from "../../../modules/Auth/_redux/authRedux";
 
+
+//Cours : 101.11 23min44
 const SignUp = () => {
 
 
