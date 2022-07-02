@@ -13,21 +13,22 @@ export const initialLoginDataState: ILoginData = {
     password: "",
     confirmPassword: "",
     isError: false,
-    helperText: "Someting's wrong..."
+    helperText: "U"
 }
 
 export type LoginActionType = { type: "setUsername", payload: string }
     | { type: "setEmail", payload: string }
     | { type: "setPassword", payload: string }
     | { type: "setconfirmPassword", payload: string }
-    | { type: "setIsError", payload: boolean };
+    | { type: "setIsError", payload: boolean }
+    | { type: "setHelperText", payload: string };
 
-export const AuthReducer = (state: ILoginData, action: LoginActionType): ILoginData => {
+export const AuthReducer = (state: ILoginData, action: LoginActionType) => {
     switch (action.type) {
         case 'setUsername':
             return {
                 ...state,
-                username: action.payload
+                username: action.payload,
             }
 
         case 'setEmail':
@@ -52,6 +53,12 @@ export const AuthReducer = (state: ILoginData, action: LoginActionType): ILoginD
             return {
                 ...state,
                 isError: action.payload
+            }
+
+        case 'setHelperText':
+            return {
+                ...state,
+                helperText: action.payload
             }
     }
 }

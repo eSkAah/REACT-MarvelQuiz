@@ -50,10 +50,14 @@ const SignUp = () => {
                 console.log("USER:", user)
             })
             .catch(error => {
-                console.log(error)
+                console.log("error", error.message)
                 dispatch({
                     type: "setIsError",
                     payload: true
+                })
+                dispatch({
+                    type: "setHelperText",
+                    payload: error.message
                 })
             })
     }
@@ -66,10 +70,10 @@ const SignUp = () => {
         <div className="signUpLoginBox">
             <div className="slContainer">
                 <div className="formBoxLeftSignup">
-
                 </div>
                 <div className="formBoxRight">
                     <div className="formContent">
+                        {isError && (<span>{helperText}</span>)}
                         <h2>Inscription</h2>
                         <form onSubmit={handleSubmit}>
                             <div className="inputBox">
@@ -97,9 +101,7 @@ const SignUp = () => {
 
                             {btnSubmit}
                         </form>
-                        {isError ??
-                            <span>{helperText}</span>
-                        }
+                      
                     </div>
                 </div>
             </div>
