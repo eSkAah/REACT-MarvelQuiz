@@ -5,6 +5,7 @@ import Footer from "../Pages/Footer/Footer";
 import Welcome from "../Pages/Welcome/Welcome";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword";
 import {ErrorPage} from "../Pages/ErrorPage/ErrorPage";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 
@@ -18,6 +19,7 @@ const App = () => {
                     <Route path={'/welcome'} element={<Welcome/>}/>
                     <Route path={'/login'} element={<Login/>}/>
                     <Route path={'/signup'} element={<SignUp/>}/>
+                    <Route path={'/forgot'} element={<ForgotPassword/>}/>
                     <Route path={'*'} element={<ErrorPage/>}/>
                 </Routes>
                 <Footer/>

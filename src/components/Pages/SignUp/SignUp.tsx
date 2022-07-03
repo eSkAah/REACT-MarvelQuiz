@@ -2,12 +2,13 @@ import React, {useReducer} from "react";
 import {AuthReducer, initialLoginDataState} from "../../../modules/Auth/_redux/authRedux";
 import {createUserWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../Firebase/firebaseConfig"
+import {Link, useNavigate} from "react-router-dom";
 
 
 //Cours : 103
 const SignUp = () => {
 
-
+    const navigate = useNavigate();
     const [state, dispatch] = useReducer(AuthReducer, initialLoginDataState);
     const {username, email, password, confirmPassword, isError, helperText} = state;
 
@@ -48,6 +49,7 @@ const SignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then(user => {
                 console.log("USER:", user)
+                navigate("/welcome")
             })
             .catch(error => {
                 console.log("error", error.message)
@@ -101,7 +103,10 @@ const SignUp = () => {
 
                             {btnSubmit}
                         </form>
-                      
+                        <div className="linkContainer">
+                            <Link className="simpleLink" to="/login">Vous êtes déja inscrit? Veuillez vous
+                                connecter</Link>
+                        </div>
                     </div>
                 </div>
             </div>
